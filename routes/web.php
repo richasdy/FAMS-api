@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('location','LocationController');
+Route::resource('type','TypeController');
+Route::resource('type-detail','TypeDetailController');
+Route::resource('asset','AssetController');
