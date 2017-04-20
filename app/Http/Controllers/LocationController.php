@@ -50,7 +50,7 @@ class LocationController extends Controller
     {
         //
 		$location = Location::where('id',$id)->first();
-		return $location->assets;
+		return $location;
     }
 
     /**

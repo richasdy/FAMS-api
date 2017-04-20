@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('asset', require('./components/Asset.vue'));
 
 const app = new Vue({
     el: '#app'
