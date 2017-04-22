@@ -16,7 +16,7 @@ class TypeDetailController extends Controller
     {
         //
 		$type = TypeDetail::all();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**
@@ -50,7 +50,7 @@ class TypeDetailController extends Controller
     {
         //
 		$type = TypeDetail::where('id',$id)->first();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\TypeController as Type;
+use App\TypeModel as Type;
 
 class TypeController extends Controller
 {
@@ -16,7 +16,7 @@ class TypeController extends Controller
     {
         //
 		$type = Type::all();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**
@@ -50,7 +50,7 @@ class TypeController extends Controller
     {
         //
 		$type = Type::where('id',$id)->first();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**

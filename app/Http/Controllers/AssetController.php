@@ -110,4 +110,9 @@ class AssetController extends Controller
 		
 		return $id_asset;
 	}
+
+	//query asset like %query%
+	public function assetByName($query){
+        $asset = Asset::where('name','like','%'.$query.'%')->get();
+    }
 }
