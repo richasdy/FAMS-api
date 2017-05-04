@@ -15,8 +15,8 @@ class LocationController extends Controller
     public function index()
     {
         //
-		$location = Location::all();
-		return response()->json(['locations' => $location],201);
+		    $location = Location::all();
+		    return response()->json(['locations' => $location],201);
     }
 
     /**
@@ -50,7 +50,7 @@ class LocationController extends Controller
     {
         //
 		$location = Location::where('id',$id)->first();
-		return $location;
+        return response()->json(['location' => $location],201);
     }
 
     /**

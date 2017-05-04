@@ -15,13 +15,13 @@ class TypeDetailController extends Controller
     public function index(Request $request)
     {
         //
-		$type = TypeDetail::all();
-    if($request['show']=='detail'){
-      foreach($type as $t){
-        $t->id_asset_type = $t->typeParent->name;
-      }
-    }
-		return response()->json(['types' => $type],201);
+    		$type = TypeDetail::all();
+        if($request['show']=='detail'){
+          foreach($type as $t){
+            $t->id_asset_type = $t->typeParent->name;
+          }
+        }
+    		return response()->json(['types' => $type],201);
     }
 
     /**
@@ -55,7 +55,7 @@ class TypeDetailController extends Controller
     {
         //
 		$type = TypeDetail::where('id',$id)->first();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**

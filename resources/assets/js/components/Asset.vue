@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
+<<<<<<< HEAD
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -25,6 +26,13 @@
                         </tr>
                     </tbody>
                   </table>
+=======
+                    <div class="panel-heading" @click="onGetAsset">Index Asset</div>
+
+                    <div class="panel-body">
+                        {{asset}}
+                    </div>
+>>>>>>> 74bda1c39f7d6d1e0a6af37b03932d2d2b6bc602
                 </div>
             </div>
         </div>
@@ -32,6 +40,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 
   export default {
     data() {
@@ -45,6 +54,28 @@
           console.log(response);
           return self.assets=response.data.assets;
         });
+=======
+    import axios from 'axios';
+
+    export default {
+        data() {
+            return {
+                asset : []
+            }
+        },
+        methods: {
+            onGetAsset() {
+                axios.get('http://localhost:8000/api/asset/')
+                    .then(function (response) {
+                         this.data().asset = response.data;
+                         console.log(this.data().asset);
+                    })
+                    .catch(
+                        error => console.log(error)
+                    );
+            },
+        }
+>>>>>>> 74bda1c39f7d6d1e0a6af37b03932d2d2b6bc602
     }
   }
 </script>

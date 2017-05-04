@@ -50,7 +50,7 @@ class TypeController extends Controller
     {
         //
 		$type = Type::where('id',$id)->first();
-		return $type;
+        return response()->json(['type' => $type],201);
     }
 
     /**

@@ -22,5 +22,5 @@ Route::resource('type','TypeController');
 Route::resource('type-detail','TypeDetailController');
 Route::resource('asset','AssetController');
 
-
-
+Route::get('asset-by-location/{id_location}','SearchController@assetInLocation');
+Route::get('asset-by-type/{id_type_detail}','SearchController@assetByType');
