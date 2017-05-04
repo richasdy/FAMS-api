@@ -16,7 +16,7 @@ class LocationController extends Controller
     {
         //
 		$location = Location::all();
-		return $location;
+		return response()->json(['locations' => $location],201);
     }
 
     /**

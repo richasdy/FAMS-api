@@ -12,10 +12,16 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 		$asset = Asset::all();
+    if($request['show']=='detail'){
+      foreach($asset as $a){
+        $a->id_location = $a->location->name;
+        $a->id_asset_type_detail = $a->typeDetail->name;
+      }
+    }
 		return response()->json(['assets' => $asset],201);
     }
 
@@ -90,7 +96,7 @@ class AssetController extends Controller
     {
         //
     }
-	
+
 	public function createID($request){
 		//buat ID dari request (11 digit)
 		//digit 1 = asset_origin (logistik/hibah)
@@ -98,7 +104,7 @@ class AssetController extends Controller
 		//digit 4-5 = id_location (2 digit, contoh : 1 = 01)
 		//digit 6-8 = id_asset_type_detail (3 digit)
 		//digit 9-11 = no urut asset (3 digit, contoh : 1 = 001)
-		
+
 		//format request
 		$asset_origin = $request->asset_origin;
 		$year = substr($request->year,2);
@@ -107,7 +113,7 @@ class AssetController extends Controller
 		$id_asset_order = sprintf("%03d",$request->id_asset_order); //zerofill
 		//gabung request jadi id
 		$id_asset = $asset_origin.$year.$id_location.$id_asset_type_detail.$id_asset_order;
-		
+
 		return $id_asset;
 	}
 }

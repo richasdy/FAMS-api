@@ -12,11 +12,16 @@ class TypeDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 		$type = TypeDetail::all();
-		return $type;
+    if($request['show']=='detail'){
+      foreach($type as $t){
+        $t->id_asset_type = $t->typeParent->name;
+      }
+    }
+		return response()->json(['types' => $type],201);
     }
 
     /**

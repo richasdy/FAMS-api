@@ -1,4 +1,4 @@
-
+import router from './routes.js';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -17,5 +17,6 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('asset', require('./components/Asset.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

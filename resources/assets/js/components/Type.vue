@@ -7,21 +7,15 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Origin</th>
-                        <th>Year</th>
-                        <th>Location</th>
+                        <th>Name</th>
                         <th>Type</th>
-                        <th>Order</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <tr v-for='asset in assets'>
-                          <td>{{asset.id}}</td>
-                          <td>{{asset.asset_origin}}</td>
-                          <td>{{asset.year}}</td>
-                          <td>{{asset.id_location}}</td>
-                          <td>{{asset.id_asset_type_detail}}</td>
-                          <td>{{asset.id_asset_order}}</td>
+                        <tr v-for='type in types'>
+                          <td>{{type.id}}</td>
+                          <td>{{type.name}}</td>
+                          <td>{{type.id_asset_type}}</td>
                         </tr>
                     </tbody>
                   </table>
@@ -36,14 +30,14 @@
   export default {
     data() {
       return {
-          assets: []
+          types: []
       }
     },
     mounted() {
       var self = this;
-      axios.get('/api/asset?show=detail').then(function(response){
+      axios.get('/api/type-detail?show=detail').then(function(response){
           console.log(response);
-          return self.assets=response.data.assets;
+          return self.types=response.data.types;
         });
     }
   }
