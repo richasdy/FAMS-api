@@ -45,10 +45,11 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         //
-		$request['id'] = $this->createID($request);
-		$asset = new Asset($request->all());
-		$asset->save();
-		return response()->json(['asset' => $asset],201);
+      $request['id_asset_order'] = $this->checkSimilarAsset($request['id_asset_type_detail']);
+  		$request['id'] = $this->createID($request);
+  		$asset = new Asset($request->all());
+  		$asset->save();
+  		return response()->json(['asset' => $asset],201);
     }
 
     /**
@@ -111,9 +112,9 @@ class AssetController extends Controller
 		$year = substr($request->year,2);
 		$id_location = sprintf("%02d", $request->id_location); //zerofill
 		$id_asset_type_detail = $request->id_asset_type_detail;
-		//$id_asset_order = sprintf("%03d",$request->id_asset_order); //zerofill
+		$id_asset_order = sprintf("%03d",$request->id_asset_order); //zerofill
     //check asset yang type sama
-    $id_asset_order = sprintf("%03d",$this->checkSimilarAsset($id_asset_type_detail));//zerofill
+    //$id_asset_order = sprintf("%03d",$this->checkSimilarAsset($id_asset_type_detail));//zerofill
     //gabung request jadi id
 		$id_asset = $asset_origin.$year.$id_location.$id_asset_type_detail.$id_asset_order;
     //dd($id_asset);

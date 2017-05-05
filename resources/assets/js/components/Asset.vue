@@ -111,9 +111,14 @@
     },
     methods:{
       addAsset(){
+        var self = this;
         //console.log(self.formAddAsset);
-        axios.post('/api/asset',self.formAddAsset).then(function(response){
+        axios.post('/api/asset',self.formAddAsset)
+        .then(response => {
           console.log(response);
+        })
+        .catch(error => {
+          console.log(error.response);
         });
       },
     }
