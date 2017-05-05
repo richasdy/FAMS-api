@@ -16,7 +16,7 @@ class AssetController extends Controller
     public function index(Request $request)
     {
         //
-		$asset = Asset::all();
+		$asset = Asset::orderBy('created_at','ASC')->get();
     if($request['show']=='detail'){
       foreach($asset as $a){
         $a->id_location = $a->location->name;

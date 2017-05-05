@@ -12,6 +12,7 @@
                         <th>Location</th>
                         <th>Type</th>
                         <th>Order</th>
+                        <th colspan="2">Menu</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,8 @@
                           <td>{{asset.id_location}}</td>
                           <td>{{asset.id_asset_type_detail}}</td>
                           <td>{{asset.id_asset_order}}</td>
+                          <td><span class="glyphicon glyphicon-pencil"></span></td>
+                          <td><span class="glyphicon glyphicon-trash"></span></td>
                         </tr>
                     </tbody>
                   </table>
@@ -96,18 +99,7 @@
     },
     mounted() {
       var self = this;
-      axios.get('/api/asset?show=detail').then(function(response){
-          //console.log(response);
-          return self.assets=response.data.assets;
-        });
-      axios.get('/api/location').then(function(response){
-          //console.log(response);
-          return self.location=response.data.locations;
-        });
-      axios.get('/api/type-detail').then(function(response){
-          //console.log(response);
-          return self.asset_type=response.data.types;
-        });
+      self.fetchAsset();
     },
     methods:{
       addAsset(){
@@ -115,11 +107,27 @@
         //console.log(self.formAddAsset);
         axios.post('/api/asset',self.formAddAsset)
         .then(response => {
+          self.fetchAsset();
           console.log(response);
         })
         .catch(error => {
           console.log(error.response);
         });
+      },
+      fetchAsset(){
+        var self = this;
+        axios.get('/api/asset?show=detail').then(function(response){
+            //console.log(response);
+            return self.assets=response.data.assets;
+          });
+        axios.get('/api/location').then(function(response){
+            //console.log(response);
+            return self.location=response.data.locations;
+          });
+        axios.get('/api/type-detail').then(function(response){
+            //console.log(response);
+            return self.asset_type=response.data.types;
+          });
       },
     }
   }
