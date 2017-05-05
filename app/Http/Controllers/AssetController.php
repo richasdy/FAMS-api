@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AssetModel as Asset;
+use App\Http\Controllers\TypeDetailController as Type;
 
 class AssetController extends Controller
 {
@@ -104,18 +105,29 @@ class AssetController extends Controller
 		//digit 4-5 = id_location (2 digit, contoh : 1 = 01)
 		//digit 6-8 = id_asset_type_detail (3 digit)
 		//digit 9-11 = no urut asset (3 digit, contoh : 1 = 001)
-
+    //dd($request['asset_origin']);
 		//format request
 		$asset_origin = $request->asset_origin;
 		$year = substr($request->year,2);
 		$id_location = sprintf("%02d", $request->id_location); //zerofill
 		$id_asset_type_detail = $request->id_asset_type_detail;
-		$id_asset_order = sprintf("%03d",$request->id_asset_order); //zerofill
-		//gabung request jadi id
+		//$id_asset_order = sprintf("%03d",$request->id_asset_order); //zerofill
+    //check asset yang type sama
+    $id_asset_order = sprintf("%03d",$this->checkSimilarAsset($id_asset_type_detail));//zerofill
+    //gabung request jadi id
 		$id_asset = $asset_origin.$year.$id_location.$id_asset_type_detail.$id_asset_order;
-
+    //dd($id_asset);
 		return $id_asset;
 	}
+
+  //fungsi untuk checking Asset yang sama = menentukan nomor urut asset
+  //nomor urut asset = max asset + 1
+  public function checkSimilarAsset($checkType){
+    $T = new Type();
+    $type = $T->show($checkType);
+    $lastAssetOrder = $type->assets->max('id_asset_order');
+    return $lastAssetOrder+1;
+  }
 
 	//query asset like %query%
 	public function assetByName($query){

@@ -12,8 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('asset');
 });
-
-Route::resource('asset','AssetController');
-Route::get('asset-page','DashboardPageController@assetPage');

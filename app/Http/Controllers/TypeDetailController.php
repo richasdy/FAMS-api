@@ -55,7 +55,7 @@ class TypeDetailController extends Controller
     {
         //
 		$type = TypeDetail::where('id',$id)->first();
-        return response()->json(['type' => $type],201);
+      return $type;
     }
 
     /**
