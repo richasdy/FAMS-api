@@ -16,14 +16,8 @@ class AssetController extends Controller
     public function index(Request $request)
     {
         //
-		$asset = Asset::all();
-    if($request['show']=='detail'){
-      foreach($asset as $a){
-        $a->id_location = $a->location->name;
-        $a->id_asset_type_detail = $a->typeDetail->name;
-      }
-    }
-		return response()->json(['assets' => $asset],201);
+  		$asset = Asset::orderBy('created_at')->get();
+      return $asset;
     }
 
     /**
@@ -61,8 +55,8 @@ class AssetController extends Controller
     public function show($id)
     {
         //
-		$asset = Asset::where('id',$id)->first();
-		return response()->json(['asset' => $asset],201);
+  		$asset = Asset::where('id',$id)->first();
+  		return response()->json(['asset' => $asset],201);
     }
 
     /**

@@ -13755,6 +13755,7 @@ if (inBrowser && window.Vue) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes_js__ = __webpack_require__(38);
 
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -14710,6 +14711,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -14728,18 +14781,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     var self = this;
-    axios.get('/api/asset?show=detail').then(function (response) {
-      //console.log(response);
-      return self.assets = response.data.assets;
-    });
-    axios.get('/api/location').then(function (response) {
-      //console.log(response);
-      return self.location = response.data.locations;
-    });
-    axios.get('/api/type-detail').then(function (response) {
-      //console.log(response);
-      return self.asset_type = response.data.types;
-    });
+    self.fetchAsset();
   },
 
   methods: {
@@ -14748,8 +14790,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //console.log(self.formAddAsset);
       axios.post('/api/asset', self.formAddAsset).then(function (response) {
         console.log(response);
+        self.fetchAsset();
       }).catch(function (error) {
         console.log(error.response);
+      });
+    },
+    fetchAsset: function fetchAsset() {
+      var self = this;
+      axios.get('/api/asset?show=detail').then(function (response) {
+        //console.log(response);
+        return self.assets = response.data.assets;
+      });
+      axios.get('/api/location').then(function (response) {
+        //console.log(response);
+        return self.location = response.data.locations;
+      });
+      axios.get('/api/type-detail').then(function (response) {
+        //console.log(response);
+        return self.asset_type = response.data.types;
       });
     }
   }
@@ -17617,15 +17675,172 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('table', {
     staticClass: "table table-bordered"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.assets), function(asset) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(asset.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.asset_origin))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.year))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_location))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_type_detail))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_order))])])
+    return _c('tr', [_c('td', [_vm._v(_vm._s(asset.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.asset_origin))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.year))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_location))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_type_detail))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_order))]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])
   }))])])]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-info btn-md",
     attrs: {
       "type": "button",
       "data-toggle": "modal",
-      "data-target": "#myModal"
+      "data-target": "#addAssetModal"
     }
   }, [_vm._v("Add Asset")]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "addAssetModal",
+      "role": "dialog"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog"
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.addAsset($event)
+      }
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Source")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.formAddAsset.asset_origin),
+      expression: "formAddAsset.asset_origin"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "source"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.formAddAsset.asset_origin = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "H"
+    }
+  }, [_vm._v("Hibah")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "L"
+    }
+  }, [_vm._v("Logistik")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Year")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.formAddAsset.year),
+      expression: "formAddAsset.year"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "year"
+    },
+    domProps: {
+      "value": (_vm.formAddAsset.year)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.formAddAsset.year = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Location")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.formAddAsset.id_location),
+      expression: "formAddAsset.id_location"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "location"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.formAddAsset.id_location = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.location), function(loc) {
+    return _c('option', {
+      domProps: {
+        "value": loc.id
+      }
+    }, [_vm._v(_vm._s(loc.name))])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Type")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.formAddAsset.id_asset_type_detail),
+      expression: "formAddAsset.id_asset_type_detail"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "name": "location"
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.formAddAsset.id_asset_type_detail = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.asset_type), function(type) {
+    return _c('option', {
+      domProps: {
+        "value": type.id
+      }
+    }, [_vm._v(_vm._s(type.name))])
+  }))]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Submit")])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  })])])]), _vm._v(" "), _c('div', {
     staticClass: "modal fade",
     attrs: {
       "id": "myModal",
@@ -17635,7 +17850,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
     on: {
@@ -17784,7 +17999,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-footer"
   })])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Origin")]), _vm._v(" "), _c('th', [_vm._v("Year")]), _vm._v(" "), _c('th', [_vm._v("Location")]), _vm._v(" "), _c('th', [_vm._v("Type")]), _vm._v(" "), _c('th', [_vm._v("Order")])])])
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Origin")]), _vm._v(" "), _c('th', [_vm._v("Year")]), _vm._v(" "), _c('th', [_vm._v("Location")]), _vm._v(" "), _c('th', [_vm._v("Type")]), _vm._v(" "), _c('th', [_vm._v("Order")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v("Menu")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "glyphicon glyphicon-pencil"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('i', {
+    staticClass: "glyphicon glyphicon-trash"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title"
+  }, [_vm._v("Add Asset")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
