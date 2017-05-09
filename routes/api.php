@@ -17,10 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('location','LocationController');
-Route::resource('type','TypeController');
-Route::resource('type-detail','TypeDetailController');
-Route::resource('asset','AssetController');
+Route::get('fetch/asset-page','DashboardPageController@fetchAssetPage');
+Route::get('destroy/asset','DashboardPageController@destroyAsset');
 
-Route::get('asset-by-location/{id_location}','SearchController@assetInLocation');
-Route::get('asset-by-type/{id_type_detail}','SearchController@assetByType');
+//search
+// Route::get('asset-by-location/{id_location}','SearchController@assetInLocation');
+// Route::get('asset-by-type/{id_type_detail}','SearchController@assetByType');

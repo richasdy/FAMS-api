@@ -14,7 +14,7 @@
                       <tr v-for='location in locations'>
                         <td>{{location.id}}</td>
                         <td>{{location.name}}</td>
-                      </tr>    
+                      </tr>
                   </tbody>
                 </table>
               </div>
@@ -35,7 +35,7 @@
       var self = this;
       axios.get('/api/location').then(function(response){
           console.log(response);
-          return self.locations=response.data.locations;
+          return self.locations=response.data;
         });
     }
   }

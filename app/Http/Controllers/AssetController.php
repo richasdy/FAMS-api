@@ -13,10 +13,9 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
-  		$asset = Asset::orderBy('created_at')->get();
+  		$asset = Asset::orderBy('created_at')->paginate(10);
       return $asset;
     }
 
@@ -43,7 +42,7 @@ class AssetController extends Controller
   		$request['id'] = $this->createID($request);
   		$asset = new Asset($request->all());
   		$asset->save();
-  		return response()->json(['asset' => $asset],201);
+  		return $asset;
     }
 
     /**
@@ -56,7 +55,7 @@ class AssetController extends Controller
     {
         //
   		$asset = Asset::where('id',$id)->first();
-  		return response()->json(['asset' => $asset],201);
+  		return $asset;
     }
 
     /**
@@ -91,6 +90,8 @@ class AssetController extends Controller
     public function destroy($id)
     {
         //
+        $asset = $this->show($id);
+        $asset->delete();
     }
 
 	public function createID($request){

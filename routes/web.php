@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('asset');
+    return view('asset-page/index');
 });
+
+// Route::get('/fetch-asset-page','DashboardPageController@fetchAssetPage');
+// Route::resource('asset-page','AssetController',['except' => ['index']]);

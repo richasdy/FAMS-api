@@ -14760,10 +14760,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14776,12 +14772,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         year: '',
         id_location: '',
         id_asset_type_detail: ''
+      },
+      modal: {
+        delete_asset: false,
+        update_asset: false,
+        create_asset: false
+      },
+      alert: {
+        show: false,
+        status: '',
+        message: ''
       }
     };
   },
   mounted: function mounted() {
     var self = this;
-    self.fetchAsset();
+    self.fetchAsset(1);
   },
 
   methods: {
@@ -14789,25 +14795,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var self = this;
       //console.log(self.formAddAsset);
       axios.post('/api/asset', self.formAddAsset).then(function (response) {
+        self.fetchAsset(1);
         console.log(response);
-        self.fetchAsset();
       }).catch(function (error) {
         console.log(error.response);
       });
     },
-    fetchAsset: function fetchAsset() {
+    fetchAsset: function fetchAsset(page) {
       var self = this;
-      axios.get('/api/asset?show=detail').then(function (response) {
-        //console.log(response);
-        return self.assets = response.data.assets;
+      var req = "?page=" + page;
+      axios.get('/api/fetch/asset-page' + req).then(function (response) {
+        console.log(response);
+        self.assets = response.data.assets;
+        self.location = response.data.location;
+        self.asset_type = response.data.type;
+        return 'ok';
       });
-      axios.get('/api/location').then(function (response) {
-        //console.log(response);
-        return self.location = response.data.locations;
-      });
-      axios.get('/api/type-detail').then(function (response) {
-        //console.log(response);
-        return self.asset_type = response.data.types;
+    },
+    destroyAsset: function destroyAsset(id) {
+      var self = this;
+      var req = "?id=" + id;
+      axios.get('/api/destroy/asset' + req).then(function (response) {
+        self.fetchAsset(1);
+      }).catch(function (error) {
+        console.log(error.response);
       });
     }
   }
@@ -14914,7 +14925,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var self = this;
     axios.get('/api/location').then(function (response) {
       console.log(response);
-      return self.locations = response.data.locations;
+      return self.locations = response.data;
     });
   }
 });
@@ -14964,7 +14975,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var self = this;
     axios.get('/api/type-detail?show=detail').then(function (response) {
       console.log(response);
-      return self.types = response.data.types;
+      return self.types = response.data;
     });
   }
 });
@@ -15005,6 +15016,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
  */
 
 window.axios = __webpack_require__(14);
+
+//window.axios.defaults.baseURL = 'http://localhost';
 
 window.axios.defaults.headers.common = {
   'X-CSRF-TOKEN': window.Laravel.csrfToken,
@@ -17665,18 +17678,88 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container"
+    staticClass: "page-content-col"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
+    staticClass: "col-md-12"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "portlet box green"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "portlet-body flip-scroll"
   }, [_c('table', {
-    staticClass: "table table-bordered"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.assets), function(asset) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(asset.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.asset_origin))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.year))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_location))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_type_detail))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_order))]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])
-  }))])])]), _vm._v(" "), _c('button', {
+    staticClass: "table table-bordered table-striped table-condensed flip-content"
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.assets.data), function(asset) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(asset.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.asset_origin))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.year))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_location))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_type_detail))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(asset.id_asset_order))]), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _c('td', [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.destroyAsset(asset.id)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "glyphicon glyphicon-trash"
+    })])])])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "flip-content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-5 col-sm-5"
+  }, [_vm._v("\n                      Showing " + _vm._s(_vm.assets.from) + " to " + _vm._s(_vm.assets.to) + " from " + _vm._s(_vm.assets.total) + " data\n                    ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7"
+  }, [_c('div', {
+    staticClass: "dataTables_paginate paging_bootstrap_full_number"
+  }, [_c('ul', {
+    staticClass: "pagination"
+  }, [_c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchAsset(1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-left"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchAsset(_vm.assets.current_page - 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-left"
+  })])]), _vm._v(" "), _vm._l((_vm.assets.last_page), function(n) {
+    return _c('li', [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.fetchAsset(n)
+        }
+      }
+    }, [_vm._v(_vm._s(n))])])
+  }), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchAsset(_vm.assets.current_page + 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-right"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchAsset(_vm.assets.last_page)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-right"
+  })])])], 2)])])])])])])])]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-info btn-md",
     attrs: {
       "type": "button",
@@ -17687,163 +17770,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal fade",
     attrs: {
       "id": "addAssetModal",
-      "role": "dialog"
-    }
-  }, [_c('div', {
-    staticClass: "modal-dialog"
-  }, [_c('div', {
-    staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "modal-body"
-  }, [_c('form', {
-    on: {
-      "submit": function($event) {
-        $event.preventDefault();
-        _vm.addAsset($event)
-      }
-    }
-  }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Source")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.formAddAsset.asset_origin),
-      expression: "formAddAsset.asset_origin"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "source"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.formAddAsset.asset_origin = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, [_c('option', {
-    attrs: {
-      "value": "H"
-    }
-  }, [_vm._v("Hibah")]), _vm._v(" "), _c('option', {
-    attrs: {
-      "value": "L"
-    }
-  }, [_vm._v("Logistik")])])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Year")]), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.formAddAsset.year),
-      expression: "formAddAsset.year"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "year"
-    },
-    domProps: {
-      "value": (_vm.formAddAsset.year)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.formAddAsset.year = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Location")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.formAddAsset.id_location),
-      expression: "formAddAsset.id_location"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "location"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.formAddAsset.id_location = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.location), function(loc) {
-    return _c('option', {
-      domProps: {
-        "value": loc.id
-      }
-    }, [_vm._v(_vm._s(loc.name))])
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": ""
-    }
-  }, [_vm._v("Type")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.formAddAsset.id_asset_type_detail),
-      expression: "formAddAsset.id_asset_type_detail"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "location"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.formAddAsset.id_asset_type_detail = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.asset_type), function(type) {
-    return _c('option', {
-      domProps: {
-        "value": type.id
-      }
-    }, [_vm._v(_vm._s(type.name))])
-  }))]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Submit")])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
-  })])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade",
-    attrs: {
-      "id": "myModal",
       "role": "dialog"
     }
   }, [_c('div', {
@@ -17997,9 +17923,46 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Submit")])])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
-  })])])])])])
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Origin")]), _vm._v(" "), _c('th', [_vm._v("Year")]), _vm._v(" "), _c('th', [_vm._v("Location")]), _vm._v(" "), _c('th', [_vm._v("Type")]), _vm._v(" "), _c('th', [_vm._v("Order")]), _vm._v(" "), _c('th', {
+  return _c('div', {
+    staticClass: "note note-success"
+  }, [_c('p', [_vm._v(" Please try to re-size your browser window in order to see the tables in responsive mode. ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "portlet-title"
+  }, [_c('div', {
+    staticClass: "caption"
+  }, [_c('i', {
+    staticClass: "fa fa-cogs"
+  }), _vm._v("Asset's Table")]), _vm._v(" "), _c('div', {
+    staticClass: "tools"
+  }, [_c('a', {
+    staticClass: "collapse",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "config",
+    attrs: {
+      "href": "#portlet-config",
+      "data-toggle": "modal"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "reload",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "remove",
+    attrs: {
+      "href": "javascript:;"
+    }
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', {
+    staticClass: "flip-content"
+  }, [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Origin")]), _vm._v(" "), _c('th', [_vm._v("Year")]), _vm._v(" "), _c('th', [_vm._v("Location")]), _vm._v(" "), _c('th', [_vm._v("Type")]), _vm._v(" "), _c('th', [_vm._v("Order")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "2"
     }
@@ -18008,22 +17971,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('td', [_c('i', {
     staticClass: "glyphicon glyphicon-pencil"
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('i', {
-    staticClass: "glyphicon glyphicon-trash"
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "modal-header"
-  }, [_c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "modal"
-    }
-  }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
-    staticClass: "modal-title"
-  }, [_vm._v("Add Asset")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"

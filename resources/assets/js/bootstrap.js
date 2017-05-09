@@ -29,6 +29,8 @@ Vue.use(VueRouter)
 
 window.axios = require('axios');
 
+//window.axios.defaults.baseURL = 'http://localhost';
+
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'

@@ -37,7 +37,7 @@
       var self = this;
       axios.get('/api/type-detail?show=detail').then(function(response){
           console.log(response);
-          return self.types=response.data.types;
+          return self.types=response.data;
         });
     }
   }
