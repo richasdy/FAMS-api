@@ -14913,6 +14913,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -14923,10 +14966,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     var self = this;
-    axios.get('/api/location').then(function (response) {
-      console.log(response);
-      return self.locations = response.data;
-    });
+    self.fetchLocation(1);
+  },
+
+  methods: {
+    fetchLocation: function fetchLocation(page) {
+      var self = this;
+      var req = "?page=" + page;
+      axios.get('/api/fetch/location-page' + req).then(function (response) {
+        console.log(response);
+        return self.locations = response.data.location;
+      });
+    }
   }
 });
 
@@ -14936,6 +14987,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14973,10 +15067,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     var self = this;
-    axios.get('/api/type-detail?show=detail').then(function (response) {
-      console.log(response);
-      return self.types = response.data;
-    });
+    self.fetchType(1);
+  },
+
+  methods: {
+    fetchType: function fetchType(page) {
+      var self = this;
+      var req = "?page=" + page;
+      axios.get('/api/fetch/type-page' + req).then(function (response) {
+        console.log(response);
+        return self.types = response.data.type;
+      });
+    }
   }
 });
 
@@ -17591,20 +17693,119 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container"
+    staticClass: "page-content-col"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
+    staticClass: "col-md-12"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "portlet box green"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "portlet-body flip-scroll"
   }, [_c('table', {
-    staticClass: "table table-bordered"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.locations), function(location) {
+    staticClass: "table table-bordered table-striped table-condensed flip-content"
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.locations.data), function(location) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(location.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(location.name))])])
-  }))])])])])])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "flip-content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-5 col-sm-5"
+  }, [_vm._v("\n                      Showing " + _vm._s(_vm.locations.from) + " to " + _vm._s(_vm.locations.to) + " from " + _vm._s(_vm.locations.total) + " data\n                    ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7"
+  }, [_c('div', {
+    staticClass: "dataTables_paginate paging_bootstrap_full_number"
+  }, [_c('ul', {
+    staticClass: "pagination"
+  }, [_c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchLocation(1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-left"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchLocation(_vm.locations.current_page - 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-left"
+  })])]), _vm._v(" "), _vm._l((_vm.locations.last_page), function(n) {
+    return _c('li', [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.fetchLocation(n)
+        }
+      }
+    }, [_vm._v(_vm._s(n))])])
+  }), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchLocation(_vm.locations.current_page + 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-right"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchLocation(_vm.locations.last_page)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-right"
+  })])])], 2)])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Location")])])])
+  return _c('div', {
+    staticClass: "note note-success"
+  }, [_c('p', [_vm._v(" Error/Notification Alert ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "portlet-title"
+  }, [_c('div', {
+    staticClass: "caption"
+  }, [_c('i', {
+    staticClass: "fa fa-cogs"
+  }), _vm._v("Asset's Table")]), _vm._v(" "), _c('div', {
+    staticClass: "tools"
+  }, [_c('a', {
+    staticClass: "collapse",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "config",
+    attrs: {
+      "href": "#portlet-config",
+      "data-toggle": "modal"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "reload",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "remove",
+    attrs: {
+      "href": "javascript:;"
+    }
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', {
+    staticClass: "flip-content"
+  }, [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Location")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -17620,20 +17821,119 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container"
+    staticClass: "page-content-col"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
+    staticClass: "col-md-12"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "portlet box green"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "portlet-body flip-scroll"
   }, [_c('table', {
-    staticClass: "table table-bordered"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.types), function(type) {
+    staticClass: "table table-bordered table-striped table-condensed flip-content"
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.types.data), function(type) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(type.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(type.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(type.id_asset_type))])])
-  }))])])])])])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "flip-content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-5 col-sm-5"
+  }, [_vm._v("\n                      Showing " + _vm._s(_vm.types.from) + " to " + _vm._s(_vm.types.to) + " from " + _vm._s(_vm.types.total) + " data\n                    ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7"
+  }, [_c('div', {
+    staticClass: "dataTables_paginate paging_bootstrap_full_number"
+  }, [_c('ul', {
+    staticClass: "pagination"
+  }, [_c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchType(1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-left"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "prev"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchType(_vm.types.current_page - 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-left"
+  })])]), _vm._v(" "), _vm._l((_vm.types.last_page), function(n) {
+    return _c('li', [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.fetchType(n)
+        }
+      }
+    }, [_vm._v(_vm._s(n))])])
+  }), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchType(_vm.types.current_page + 1)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-right"
+  })])]), _vm._v(" "), _c('li', {
+    staticClass: "next"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.fetchType(_vm.types.last_page)
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-angle-double-right"
+  })])])], 2)])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Type")])])])
+  return _c('div', {
+    staticClass: "note note-success"
+  }, [_c('p', [_vm._v(" Error/Notification Alert ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "portlet-title"
+  }, [_c('div', {
+    staticClass: "caption"
+  }, [_c('i', {
+    staticClass: "fa fa-cogs"
+  }), _vm._v("Asset's Table")]), _vm._v(" "), _c('div', {
+    staticClass: "tools"
+  }, [_c('a', {
+    staticClass: "collapse",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "config",
+    attrs: {
+      "href": "#portlet-config",
+      "data-toggle": "modal"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "reload",
+    attrs: {
+      "href": "javascript:;"
+    }
+  }), _vm._v(" "), _c('a', {
+    staticClass: "remove",
+    attrs: {
+      "href": "javascript:;"
+    }
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', {
+    staticClass: "flip-content"
+  }, [_c('tr', [_c('th', [_vm._v("ID")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', [_vm._v("Type")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -17927,7 +18227,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "note note-success"
-  }, [_c('p', [_vm._v(" Please try to re-size your browser window in order to see the tables in responsive mode. ")])])
+  }, [_c('p', [_vm._v(" Error/Notification Alert ")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "portlet-title"

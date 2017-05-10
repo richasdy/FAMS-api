@@ -4,7 +4,7 @@
       <div class="row">
           <div class="col-md-12">
               <div class="note note-success">
-                  <p> Please try to re-size your browser window in order to see the tables in responsive mode. </p>
+                  <p> Error/Notification Alert </p>
               </div>
               <div class="portlet box green">
                 <div class="portlet-title">

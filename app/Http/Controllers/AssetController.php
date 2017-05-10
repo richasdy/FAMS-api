@@ -15,7 +15,12 @@ class AssetController extends Controller
      */
     public function index()
     {
-  		$asset = Asset::orderBy('created_at')->paginate(10);
+  		$asset = Asset::all();
+      return $asset;
+    }
+
+    public function indexPaginate($page){
+      $asset = Asset::orderBy('created_at')->paginate($page);
       return $asset;
     }
 

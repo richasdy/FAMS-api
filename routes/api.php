@@ -17,8 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route CRUD ASSET di dashboard
 Route::get('fetch/asset-page','DashboardPageController@fetchAssetPage');
 Route::get('destroy/asset','DashboardPageController@destroyAsset');
+
+//Route CRUD location di dashboard
+Route::get('fetch/location-page','DashboardPageController@fetchLocationPage');
+Route::get('destroy/location','DashboardPageController@destroyLocation');
+
+//Route CRUD Type di dashboard
+Route::get('fetch/type-page','DashboardPageController@fetchTypePage');
+Route::get('destroy/type','DashboardPageController@destroyType');
 
 //search
 // Route::get('asset-by-location/{id_location}','SearchController@assetInLocation');

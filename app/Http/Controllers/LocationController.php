@@ -19,6 +19,13 @@ class LocationController extends Controller
 		    return $location;
     }
 
+    public function indexPaginate($page)
+    {
+        //
+		    $location = Location::orderBy('created_at')->paginate($page);
+		    return $location;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

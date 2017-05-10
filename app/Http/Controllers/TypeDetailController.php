@@ -19,6 +19,11 @@ class TypeDetailController extends Controller
     		return $type;
     }
 
+    public function indexPaginate($page)
+    {
+      $type = TypeDetail::orderBy('created_at')->paginate($page);
+      return $type;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +54,7 @@ class TypeDetailController extends Controller
     public function show($id)
     {
         //
-		$type = TypeDetail::where('id',$id)->first();
+      $type = TypeDetail::where('id',$id)->first();
       return $type;
     }
 

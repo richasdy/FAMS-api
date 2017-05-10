@@ -16,7 +16,7 @@ class TypeController extends Controller
     {
         //
 		$type = Type::all();
-    return response()->json(['types' => $type],201);
+    return $type;
     }
 
     /**
@@ -49,8 +49,8 @@ class TypeController extends Controller
     public function show($id)
     {
         //
-		$type = Type::where('id',$id)->first();
-        return response()->json(['type' => $type],201);
+  		$type = Type::where('id',$id)->first();
+      return $type;
     }
 
     /**

@@ -21,7 +21,7 @@ class DashboardPageController extends Controller
 
 	public function fetchAssetPage(){
 		//fetch asset
-		$asset = $this->A->index();
+		$asset = $this->A->indexPaginate(5);
     foreach($asset as $a){
       $a->id_location = $a->location->name;
       $a->id_asset_type_detail = $a->typeDetail->name;
@@ -51,12 +51,21 @@ class DashboardPageController extends Controller
 		return 'ok';
 	}
 
-	public function fetchTypePage(){
-
+	public function fetchLocationPage(){
+		$location = $this->L->indexPaginate(5);
+		return response()->json([
+			'location' => $location,
+		],201);
 	}
 
-	public function fetchLocationPage(){
-
+	public function fetchTypePage(){
+		$type = $this->T->indexPaginate(5);
+		foreach($type as $t){
+      $t->type_parent = $t->typeParent->name;
+    }
+		return response()->json([
+			'type' => $type,
+		],201);
 	}
 
 }

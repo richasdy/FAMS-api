@@ -15,7 +15,7 @@
 					<!-- End Toggle Button -->
 					<!-- BEGIN LOGO -->
 					<a id="index" class="page-logo" href="index.html">
-							<img src="" alt="Logo"> </a>
+							<img src="dashboard_themes/assets/layouts/layout5/img/logo.png" alt="Logo"> </a>
 					<!-- END LOGO -->
 					<!-- BEGIN SEARCH -->
 					<form class="search" action="extra_search.html" method="GET">
@@ -25,23 +25,66 @@
 							</a>
 					</form>
 					<!-- END SEARCH -->
-						<router-link to="/">Home</router-link>
+					<!--BEGIN TOPBAR ACTIONS-->
+					<div class="topbar-actions">
+						<!-- BEGIN GROUP NOTIFICATION-->
+						<div class="btn-group-notification btn-group" id="header_notification_bar">
+								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+										<i class="icon-bell"></i>
+										<span class="badge">7</span>
+								</button>
+						</div>
+						<!-- END GROUP NOTIFICATION-->
+						<!-- BEGIN GROUP INFORMATION-->
+						<div class="btn-group-red btn-group">
+								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+										<i class="fa fa-plus"></i>
+								</button>
+						</div>
+						<!-- END GROUP INFORMATION-->
+						<!-- BEGIN USER PROFILE -->
+						<div class="btn-group-img btn-group">
+								<button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+										<span>Hi, Marcus</span>
+										<img src="dashboard_themes/assets/layouts/layout5/img/avatar1.jpg" alt="">
+								</button>
+						</div>
+						<!-- END USER PROFILE-->
+					</div>
+					<!--END TOPBAR ACTION-->
 				</div>
 				<!-- BEGIN HEADER MENU -->
 				<div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
 						<ul class="nav navbar-nav">
 								<li class="dropdown dropdown-fw dropdown-fw-disabled  active open selected">
-										<a href="javascript:;" class="text-uppercase">
-												<i class="icon-briefcase"></i> Tables </a>
+										<router-link to="/" class="text-uppercase">
+												<i class="icon-home"></i> Dashboard
+										</router-link>
+										<ul class="dropdown-menu dropdown-menu-fw">
+												<li class="active">
+													<router-link to="/home"><i class="icon-bar-chart"></i> Home</router-link>
+												</li>
+												<li>
+													<router-link to="/home"><i class="icon-bulb"></i> Home 2</router-link>
+												</li>
+												<li>
+													<router-link to="/home"><i class="icon-graph"></i> Home 3</router-link>
+												</li>
+										</ul>
+								</li>
+								<li class="dropdown dropdown-fw dropdown-fw-disabled">
+										<router-link to="/asset">
+											<i class="icon-briefcase"></i> TABLES
+										</router-link>
 										<ul class="dropdown-menu dropdown-menu-fw">
 												<li>
-														<router-link to="/asset">Asset</router-link>
+														<router-link to="/asset"><i class="fa fa-archive"></i> Asset</router-link>
 												</li>
 												<li>
-														<router-link to="/location">Location</router-link>
+														<router-link to="/location"><i class="icon-pointer"></i> Location</router-link>
 												</li>
 												<li>
-														<router-link to="/type">Type</router-link>
+														<router-link to="/type"><i class="fa fa-bookmark"></i> Type</router-link>
 												</li>
 										</ul>
 								</li>
