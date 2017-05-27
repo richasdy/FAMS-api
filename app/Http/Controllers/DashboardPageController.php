@@ -39,7 +39,7 @@ class DashboardPageController extends Controller
 	}
 
 	public function storeAsset(Request $request){
-		$this->A->store($request);
+		return $this->A->store($request);
 	}
 
 	public function updateAsset(Request $request){

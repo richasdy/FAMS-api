@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route CRUD ASSET di dashboard
 Route::get('fetch/asset-page','DashboardPageController@fetchAssetPage');
 Route::get('destroy/asset','DashboardPageController@destroyAsset');
+Route::post('store/asset','DashboardPageController@storeAsset');
 
 //Route CRUD location di dashboard
 Route::get('fetch/location-page','DashboardPageController@fetchLocationPage');

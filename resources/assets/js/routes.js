@@ -10,6 +10,10 @@ let routes=[
   component:require('./components/Asset')
 },
 {
+  path:'/add-asset',
+  component:require('./components/Add-Asset')
+},
+{
   path:'/location',
   component:require('./components/Location')
 },

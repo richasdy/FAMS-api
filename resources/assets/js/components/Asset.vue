@@ -71,60 +71,55 @@
                   </div>
                 </div>
               </div>
+              <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#addAssetModal">Add Asset</button>
           </div>
-      </div>
-      <!--END BASE CONTENT -->
+          <!-- Modal Add Begin-->
 
-            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#addAssetModal">Add Asset</button>
-            <!-- Modal Add Begin-->
-            <div id="addAssetModal" class="modal fade" role="dialog">
-              <div class="modal-dialog">
-
-                <!-- Modal Add content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add Asset</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form @submit.prevent="addAsset">
-                     <div class="form-group">
-                       <label for="">Source</label>
-                       <select name="source" class="form-control" v-model="formAddAsset.asset_origin">
-                         <option value="H">Hibah</option>
-                         <option value="L">Logistik</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
-                       <label for="">Year</label>
-                       <input type="text" class="form-control" id="year" v-model="formAddAsset.year">
-                     </div>
-                     <div class="form-group">
-                       <label for="">Location</label>
-                       <select name="location" class="form-control" v-model="formAddAsset.id_location">
-                         <option v-for="loc in location" v-bind:value="loc.id">{{loc.name}}</option>
-                        </select>
-                     </div>
-                     <div class="form-group">
-                       <label for="">Type</label>
-                       <select name="location" class="form-control" v-model="formAddAsset.id_asset_type_detail">
-                         <option v-for="type in asset_type" v-bind:value="type.id">{{type.name}}</option>
-                        </select>
-                     </div>
-
-                     <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-
-                  </div>
+          <div id="addAssetModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="#addAssetModal">&times;</button>
+                  <h4 class="modal-title">Add Asset</h4>
                 </div>
+                <div class="modal-body">
+                  <form @submit.prevent="addAsset">
+                   <div class="form-group">
+                     <label for="">Source</label>
+                     <select name="source" class="form-control" v-model="formAddAsset.asset_origin">
+                       <option value="H">Hibah</option>
+                       <option value="L">Logistik</option>
+                      </select>
+                   </div>
+                   <div class="form-group">
+                     <label for="">Year</label>
+                     <input type="text" class="form-control" id="year" v-model="formAddAsset.year">
+                   </div>
+                   <div class="form-group">
+                     <label for="">Location</label>
+                     <select name="location" class="form-control" v-model="formAddAsset.id_location">
+                       <option v-for="loc in location" v-bind:value="loc.id">{{loc.name}}</option>
+                      </select>
+                   </div>
+                   <div class="form-group">
+                     <label for="">Type</label>
+                     <select name="location" class="form-control" v-model="formAddAsset.id_asset_type_detail">
+                       <option v-for="type in asset_type" v-bind:value="type.id">{{type.name}}</option>
+                      </select>
+                   </div>
 
+                   <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                </div>
               </div>
             </div>
-            <!-- Modal Add End-->
-        </div>
-    </div>
+          </div>
+          <!-- Modal Add End-->
+      </div>
+      <!--END BASE CONTENT -->
+  </div>
 </template>
 
 <script>

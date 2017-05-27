@@ -29,7 +29,7 @@ Vue.use(VueRouter)
 
 window.axios = require('axios');
 
-//window.axios.defaults.baseURL = 'http://localhost';
+window.axios.defaults.baseURL = 'http://localhost/api-inventaris';
 
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,

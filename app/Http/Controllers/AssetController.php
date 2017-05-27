@@ -20,7 +20,7 @@ class AssetController extends Controller
     }
 
     public function indexPaginate($page){
-      $asset = Asset::orderBy('created_at')->paginate($page);
+      $asset = Asset::orderBy('created_at','DESC')->paginate($page);
       return $asset;
     }
 
@@ -126,6 +126,7 @@ class AssetController extends Controller
   public function checkSimilarAsset($checkType){
     $T = new Type();
     $type = $T->show($checkType);
+    //dd($type->assets);
     $lastAssetOrder = $type->assets->max('id_asset_order');
     return $lastAssetOrder+1;
   }

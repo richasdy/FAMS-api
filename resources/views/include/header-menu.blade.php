@@ -77,8 +77,15 @@
 											<i class="icon-briefcase"></i> TABLES
 										</router-link>
 										<ul class="dropdown-menu dropdown-menu-fw">
-												<li>
+												<li class="dropdown more-dropdown-sub">
 														<router-link to="/asset"><i class="fa fa-archive"></i> Asset</router-link>
+													<ul class="dropdown-menu">
+														<li>
+															<router-link to="/add-asset">
+																<i class="icon-home"></i> Add Asset
+															</router-link>
+														</li>
+													</ul>
 												</li>
 												<li>
 														<router-link to="/location"><i class="icon-pointer"></i> Location</router-link>
