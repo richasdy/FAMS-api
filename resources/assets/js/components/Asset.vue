@@ -71,7 +71,9 @@
                   </div>
                 </div>
               </div>
+              <!--
               <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#addAssetModal">Add Asset</button>
+              -->
           </div>
           <!-- Modal Add Begin-->
 

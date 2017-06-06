@@ -17,19 +17,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route CRUD ASSET di dashboard
-Route::get('fetch/asset-page','DashboardPageController@fetchAssetPage');
-Route::get('destroy/asset','DashboardPageController@destroyAsset');
-Route::post('store/asset','DashboardPageController@storeAsset');
+Route::get('index-asset','AssetAPI@ListAsset');
+Route::get('cu-page-asset','AssetAPI@PageAsset');
+Route::get('create-asset','AssetApi@CreateAsset');
+Route::get('update-asset/{id}','AssetAPI@UpdateAsset');
+Route::get('delete-asset/{id}','AssetAPI@DeleteAsset');
 
-//Route CRUD location di dashboard
-Route::get('fetch/location-page','DashboardPageController@fetchLocationPage');
-Route::get('destroy/location','DashboardPageController@destroyLocation');
+Route::get('index-location','LocationAPI@ListLocation');
+Route::get('cu-page-location','LocationAPI@PageLocation');
+Route::get('create-location','LocationApi@CreateLocation');
+Route::get('update-location/{id}','LocationAPI@UpdateLocation');
+Route::get('delete-location/{id}','LocationAPI@DeleteLocation');
 
-//Route CRUD Type di dashboard
-Route::get('fetch/type-page','DashboardPageController@fetchTypePage');
-Route::get('destroy/type','DashboardPageController@destroyType');
+Route::get('index-type','TypeAPI@ListType');
+Route::get('cu-page-type','TypeAPI@PageType');
+Route::get('create-type','TypeApi@CreateType');
+Route::get('update-type/{id}','TypeAPI@UpdateType');
+Route::get('delete-type/{id}','TypeAPI@DeleteType');
 
-//search
-// Route::get('asset-by-location/{id_location}','SearchController@assetInLocation');
-// Route::get('asset-by-type/{id_type_detail}','SearchController@assetByType');
+Route::get('index-type-detail','TypeDetailAPI@ListTypeDetail');
+Route::get('cu-page-type-detail','TypeDetailAPI@PageTypeDetail');
+Route::get('create-type-detail','TypeDetailApi@CreateTypeDetail');
+Route::get('update-type-detail/{id}','TypeDetailAPI@UpdateTypeDetail');
+Route::get('delete-type-detail/{id}','TypeDetailAPI@DeleteTypeDetail');

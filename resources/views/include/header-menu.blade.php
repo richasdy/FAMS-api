@@ -56,7 +56,7 @@
 				<!-- BEGIN HEADER MENU -->
 				<div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
 						<ul class="nav navbar-nav">
-								<li class="dropdown dropdown-fw dropdown-fw-disabled  active open selected">
+								<li class="dropdown dropdown-fw dropdown-fw-disabled">
 										<router-link to="/" class="text-uppercase">
 												<i class="icon-home"></i> Dashboard
 										</router-link>
@@ -72,7 +72,7 @@
 												</li>
 										</ul>
 								</li>
-								<li class="dropdown dropdown-fw dropdown-fw-disabled">
+								<li class="dropdown dropdown-fw dropdown-fw-disabled active open selected">
 										<router-link to="/asset">
 											<i class="icon-briefcase"></i> TABLES
 										</router-link>
@@ -87,8 +87,15 @@
 														</li>
 													</ul>
 												</li>
-												<li>
+												<li class="dropdown more-dropdown-sub">
 														<router-link to="/location"><i class="icon-pointer"></i> Location</router-link>
+														<ul class="dropdown-menu">
+															<li>
+																<router-link to="/add-location">
+																	<i class="icon-home"></i> Add Location
+																</router-link>
+															</li>
+														</ul>
 												</li>
 												<li>
 														<router-link to="/type"><i class="fa fa-bookmark"></i> Type</router-link>

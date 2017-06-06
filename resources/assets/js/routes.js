@@ -18,8 +18,16 @@ let routes=[
   component:require('./components/Location')
 },
 {
+  path:'/add-location',
+  component:require('./components/Add-Location')
+},
+{
   path:'/type',
   component:require('./components/Type')
+},
+{
+  path:'/add-type',
+  component:require('./components/Add-Type')
 },
 ];
 
