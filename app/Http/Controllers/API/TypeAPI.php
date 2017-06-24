@@ -16,7 +16,8 @@ class TypeAPI extends Controller
     }
 
     public function ListType(){
-      $type = $this->TYPE->index();
+      //$type = $this->TYPE->index();
+      $type = $this->TYPE->indexPaginate(10);
       return $type;
     }
 

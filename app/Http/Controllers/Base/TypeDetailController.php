@@ -22,7 +22,13 @@ class TypeDetailController extends Controller
 
     public function indexPaginate($page)
     {
-      $type = TypeDetail::orderBy('created_at')->paginate($page);
+      //$type = TypeDetail::orderBy('created_at')->paginate($page);
+      $type = TypeDetail::with([
+        'TypeParent' => function ($query){
+          $query->select('id','name');
+        }
+      ])->orderBy('created_at','DESC')
+      ->paginate($page);
       return $type;
     }
     /**

@@ -20,6 +20,12 @@ class TypeController extends Controller
         return $type;
     }
 
+    public function indexPaginate($page)
+    {
+      $type = Type::orderBy('created_at')->paginate($page);
+      return $type;
+    }
+    
     /**
      * Show the form for creating a new resource.
      *

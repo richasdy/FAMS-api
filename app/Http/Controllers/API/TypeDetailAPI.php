@@ -18,10 +18,13 @@ class TypeDetailAPI extends Controller
 
     public function ListTypeDetail(){
       $formatJson = array();
-      $typeDetail = $this->TYPEDETAIL->index();
-      //dd($typeDetail);
-      for($i=0;$i<count($typeDetail);$i++){
-        $formatJson[$i]=array(
+      $typeDetail = $this->TYPEDETAIL->indexPaginate(10);
+      //reformat assets
+      $formatJson = $typeDetail->toArray();
+      $formatJson['data']=array();
+      //dd($formatJson);
+      for($i=0;$i<count($typeDetail->toArray()['data']);$i++){
+        $formatJson['data'][$i]=array(
           'id'   => $typeDetail[$i]->id,
           'name' => $typeDetail[$i]->name,
           'type-general' => $typeDetail[$i]->TypeParent->name,

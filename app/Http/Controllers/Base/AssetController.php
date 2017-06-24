@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Base;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\AssetModel as Asset;
-use App\Http\Controllers\Base\typeDetailController as Type;
+use App\Http\Controllers\Base\TypeDetailController as Type;
 
 class AssetController extends Controller
 {
