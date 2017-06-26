@@ -46,6 +46,8 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         //
+        $last_id = Location::max('id');
+        $request['id']=$last_id+1;
         $location = new Location($request->all());
     		$location->save();
     		return $location;

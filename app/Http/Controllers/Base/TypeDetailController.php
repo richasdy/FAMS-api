@@ -50,6 +50,8 @@ class TypeDetailController extends Controller
     public function store(Request $request)
     {
         //
+        $last_id = TypeDetail::where('id','like',$request->id_asset_type.'%')->max('id');
+        $request['id']=$last_id+1;
         $type = new TypeDetail($request->all());
         $type->save();
         return $type;
@@ -101,7 +103,7 @@ class TypeDetailController extends Controller
     {
         //
         $type = $this->show($id);
-        //$type->delete();
+        $type->delete();
         return array(
           'status' => 'OK',
         );

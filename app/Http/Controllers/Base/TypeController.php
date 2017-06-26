@@ -25,7 +25,7 @@ class TypeController extends Controller
       $type = Type::orderBy('created_at')->paginate($page);
       return $type;
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,6 +45,8 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
+        $last_id = Type::max('id');
+        $request['id']=$last_id+1;
         $type = new Type($request->all());
         $type->save();
         return $type;

@@ -27,7 +27,7 @@ class TypeDetailAPI extends Controller
         $formatJson['data'][$i]=array(
           'id'   => $typeDetail[$i]->id,
           'name' => $typeDetail[$i]->name,
-          'type-general' => $typeDetail[$i]->TypeParent->name,
+          'type_general' => $typeDetail[$i]->TypeParent->name,
         );
       }
       return $formatJson;
@@ -37,7 +37,7 @@ class TypeDetailAPI extends Controller
       $type = new Type();
       $typeGeneral = $type->index();
       return array(
-        'type-general'=>$typeGeneral
+        'type_general'=>$typeGeneral
       );
     }
 

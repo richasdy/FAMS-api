@@ -137,7 +137,7 @@ class AssetController extends Controller
   public function checkSimilarAsset($checkType){
     $T = new Type();
     $type = $T->show($checkType);
-    //dd($type->assets);
+    //dd($checkType);
     $lastAssetOrder = $type->assets->max('id_asset_order');
     return $lastAssetOrder+1;
   }
