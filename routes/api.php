@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 use Illuminate\Http\Request;
 
@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+//Route::group(['middleware' => 'auth:api'], function () {
 
 Route::get('index-asset','AssetAPI@ListAsset');
 Route::get('cu-page-asset','AssetAPI@PageAsset');
@@ -40,3 +42,7 @@ Route::get('cu-page-type-detail','TypeDetailAPI@PageTypeDetail');
 Route::get('create-type-detail','TypeDetailAPI@CreateTypeDetail');
 Route::get('update-type-detail/{id}','TypeDetailAPI@UpdateTypeDetail');
 Route::get('delete-type-detail/{id}','TypeDetailAPI@DeleteTypeDetail');
+
+Route::get('create-user','UserController@createUser');
+
+//});
