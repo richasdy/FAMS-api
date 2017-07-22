@@ -52,7 +52,7 @@ class AssetController extends Controller
     {
         //
       $request['id_asset_order'] = $this->checkSimilarAsset($request['id_asset_type_detail']);
-  		$request['id'] = $this->createID($request);
+      $request['tag_rfid']=str_random(14);
   		$asset = new Asset($request->all());
   		$asset->save();
   		return $asset;

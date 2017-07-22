@@ -17,13 +17,19 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('index-asset','AssetAPI@ListAsset');
   Route::get('cu-page-asset','AssetAPI@PageAsset');
   Route::get('create-asset','AssetAPI@CreateAsset');
   Route::get('update-asset/{id}','AssetAPI@UpdateAsset');
   Route::get('delete-asset/{id}','AssetAPI@DeleteAsset');
+
+  Route::get('index-gedung','GedungAPI@ListGedung');
+  Route::get('cu-page-gedung','GedungAPI@PageGedung');
+  Route::get('create-gedung','GedungAPI@CreateGedung');
+  Route::get('update-gedung/{id}','GedungAPI@UpdateGedung');
+  Route::get('delete-gedung/{id}','GedungAPI@DeleteGedung');
 
   Route::get('index-location','LocationAPI@ListLocation');
   Route::get('cu-page-location','LocationAPI@PageLocation');
@@ -43,6 +49,14 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('update-type-detail/{id}','TypeDetailAPI@UpdateTypeDetail');
   Route::get('delete-type-detail/{id}','TypeDetailAPI@DeleteTypeDetail');
 
+  //create user
   Route::get('create-user','UserController@createUser');
 
-});
+  //fungsi search
+  Route::get('search','SearchController@search');
+
+  //dashboard
+  Route::get('asset-simple-counter','DashboardAPI@simpleCounter');
+// });
+
+//Route::get('test','DashboardAPI@simpleCounter');

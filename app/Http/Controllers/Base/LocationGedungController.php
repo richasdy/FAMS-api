@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Base;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\LocationModel as Location;
+use App\LocationGedungModel as Gedung;
 
-class LocationController extends Controller
+class LocationGedungController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,21 +16,15 @@ class LocationController extends Controller
     public function index()
     {
         //
-		    $location = Location::all();
+		    $location = Gedung::all();
 		    return $location;
     }
 
     public function indexPaginate($page)
     {
         //
-		    //$location = Location::orderBy('created_at')->paginate($page);
-        $location = Location::with([
-          'gedung' => function ($query){
-            $query->select('id','name');
-          }
-        ])->orderBy('created_at','DESC')
-        ->paginate($page);
-        return $location;
+		    $location = Gedung::orderBy('created_at')->paginate($page);
+		    return $location;
     }
 
     /**
@@ -52,9 +46,9 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         //
-        $last_id = Location::max('id');
+        $last_id = Gedung::max('id');
         $request['id']=$last_id+1;
-        $location = new Location($request->all());
+        $location = new Gedung($request->all());
     		$location->save();
     		return $location;
     }
@@ -68,7 +62,7 @@ class LocationController extends Controller
     public function show($id)
     {
         //
-        $location = Location::where('id',$id)->first();
+        $location = Gedung::where('id',$id)->first();
         return $location;
     }
 

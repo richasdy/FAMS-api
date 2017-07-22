@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Base\LocationController as Location;
+use App\Http\Controllers\Base\LocationGedungController as Gedung;
 
 class LocationAPI extends Controller
 {
@@ -22,7 +23,11 @@ class LocationAPI extends Controller
     }
 
     public function PageLocation(){
-
+      $gedung = new Gedung();
+      $gedungLocation = $gedung->index();
+      return array(
+        'gedung'  =>  $gedungLocation
+      );
     }
 
     public function CreateLocation(Request $request){
