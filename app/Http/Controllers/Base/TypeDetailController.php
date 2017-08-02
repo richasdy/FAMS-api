@@ -91,6 +91,9 @@ class TypeDetailController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $type = TypeDetail::where('id',$id)->first();
+        $type->update($request->all());
+        return $type;
     }
 
     /**

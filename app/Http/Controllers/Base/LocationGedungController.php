@@ -87,6 +87,9 @@ class LocationGedungController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $location = Gedung::where('id',$id)->first();
+        $location->update($request->all());
+        return $location;
     }
 
     /**

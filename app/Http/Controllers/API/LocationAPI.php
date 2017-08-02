@@ -35,7 +35,7 @@ class LocationAPI extends Controller
     }
 
     public function UpdateLocation(Request $request, $id){
-
+      return $this->LOCATION->update($request,$id);
     }
 
     public function DeleteLocation($id){

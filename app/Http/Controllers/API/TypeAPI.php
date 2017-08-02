@@ -30,7 +30,7 @@ class TypeAPI extends Controller
     }
 
     public function UpdateType(Request $request, $id){
-
+      return $this->TYPE->update($request,$id);
     }
 
     public function DeleteType($id){

@@ -86,6 +86,9 @@ class TypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $type = Type::where('id',$id)->first();
+        $type->update($request->all());
+        return $type;
     }
 
     /**

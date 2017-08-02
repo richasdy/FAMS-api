@@ -93,6 +93,10 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //dd($request->all());
+        $location = Location::where('id',$id)->first();
+        $location->update($request->all());
+        return $location;
     }
 
     /**

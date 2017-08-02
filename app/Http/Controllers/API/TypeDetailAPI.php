@@ -46,7 +46,7 @@ class TypeDetailAPI extends Controller
     }
 
     public function UpdateTypeDetail(Request $request, $id){
-
+      return $this->TYPEDETAIL->update($request,$id);
     }
 
     public function DeleteTypeDetail($id){

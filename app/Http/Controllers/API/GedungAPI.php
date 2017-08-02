@@ -22,7 +22,7 @@ class GedungAPI extends Controller
     }
 
     public function PageGedung(){
-      
+
     }
 
     public function CreateGedung(Request $request){
@@ -30,7 +30,7 @@ class GedungAPI extends Controller
     }
 
     public function UpdateGedung(Request $request, $id){
-
+      return $this->GEDUNG->update($request,$id);
     }
 
     public function DeleteGedung($id){
