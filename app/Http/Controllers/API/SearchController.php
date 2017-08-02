@@ -26,6 +26,7 @@ class SearchController extends Controller
       }
       //eloquent's power
       $result->location->gedung;
+      $result->typeDetail->typeParent;
 
       return array(
         'status'  => 'success',

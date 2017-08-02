@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Http\Controllers\Base\AssetController as Asset;
 use App\Http\Controllers\Base\TypeController as Type;
 use App\Http\Controllers\Base\LocationGedungController as Gedung;
@@ -25,11 +26,17 @@ class DashboardAPI extends Controller
     }
 
     public function simpleCounter(){
-      $total_asset = count($this->ASSET->index());
+      $total_asset  = count($this->ASSET->index());
+      $total_type   = count($this->TYPE->index());
+      $total_gedung = count($this->GEDUNG->index());
+      $total_user   = count(User::all());
       $locationToAsset = $this->locationToAsset();
       $typeToAsset = $this->typeToAsset();
 
       return array('total_asset' => $total_asset,
+                   'total_type'  => $total_type,
+                   'total_gedung'=> $total_gedung,
+                   'total_user'  => $total_user,
                    'location'    => $locationToAsset,
                    'type'        => $typeToAsset,
       );
@@ -41,6 +48,9 @@ class DashboardAPI extends Controller
         $gdg->detail;
         foreach($gdg->ruangan as $location){
           $location->assets;
+          // $jml = $location->sum(function (){
+          //     return count($location->assets);
+          // });
         }
       }
       return $locationToAsset;

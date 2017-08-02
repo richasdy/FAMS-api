@@ -59,4 +59,8 @@ use Illuminate\Http\Request;
   Route::get('asset-simple-counter','DashboardAPI@simpleCounter');
 // });
 
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:api');
+
 //Route::get('test','DashboardAPI@simpleCounter');

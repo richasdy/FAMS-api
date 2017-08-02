@@ -53,6 +53,8 @@ class AssetController extends Controller
         //
       $request['id_asset_order'] = $this->checkSimilarAsset($request['id_asset_type_detail']);
       $request['tag_rfid']=str_random(14);
+      $request['barcode']=str_random(14);
+      $request['id']=$this->createID($request);
   		$asset = new Asset($request->all());
   		$asset->save();
   		return $asset;
