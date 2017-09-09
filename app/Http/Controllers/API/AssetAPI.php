@@ -22,9 +22,13 @@ class AssetAPI extends Controller
       $formatAssets=array();
       //fetch data paginate
       $assets = $this->ASSET->indexPaginate(10);
+      if($assets['status']=='error'){
+        return $assets;
+      }
       //reformat assets
       $formatAssets = $assets->toArray();
       $formatAssets['data']=array();
+      // dd($assets);
       for($i=0;$i<count($assets->toArray()['data']);$i++){
         $formatAssets['data'][$i]=array(
           'id'      => $assets[$i]->id,
@@ -35,7 +39,12 @@ class AssetAPI extends Controller
           'order'   => $assets[$i]->id_asset_order,
         );
       }
-      return $formatAssets;
+      // dd($formatAssets);
+      return array(
+        'status' => 'success',
+        'data'   => $formatAssets,
+      );
+      //return $formatAssets;
     }
 
     public function PageAsset(){
@@ -50,6 +59,10 @@ class AssetAPI extends Controller
         'locations' => $locations->toArray(),
         'types'     => $types->toArray()
       );
+      // return array(
+      //   'status' => 'success',
+      //   'data'   => $formatData,
+      // );
       return $formatData;
     }
 
@@ -63,7 +76,9 @@ class AssetAPI extends Controller
     }
 
     public function DeleteAsset($id){
-      return $this->ASSET->destroy($id);
+      $hit = $this->ASSET->destroy($id);
+      return $hit;
+
     }
 
 }

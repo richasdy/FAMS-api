@@ -17,8 +17,8 @@ class GedungAPI extends Controller
 
     public function ListGedung(){
       //$location = $this->LOCATION->index();
-      $gedung = $this->GEDUNG->indexPaginate(10);
-      return $gedung;
+      return $this->GEDUNG->indexPaginate(10);
+      //return $gedung;
     }
 
     public function PageGedung(){

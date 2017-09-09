@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-// Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('index-asset','AssetAPI@ListAsset');
   Route::get('cu-page-asset','AssetAPI@PageAsset');
@@ -57,7 +57,7 @@ use Illuminate\Http\Request;
 
   //dashboard
   Route::get('asset-simple-counter','DashboardAPI@simpleCounter');
-// });
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();

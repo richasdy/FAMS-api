@@ -16,19 +16,35 @@ class AssetController extends Controller
      */
     public function index()
     {
-  		$asset = Asset::all();
+      try{
+  		    $asset = Asset::all();
+      }catch(\Exception $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e->errorInfo
+        );
+      }
+
       return $asset;
     }
 
     public function indexPaginate($page){
-      $asset = Asset::with([
-        'location' => function ($query){
-          $query->select('id','name');
-        },
-        'typeDetail' => function ($query) {
-          $query->select('id','name');
-        }])->orderBy('created_at','DESC')
-        ->paginate($page);
+      try{
+        $asset = Asset::with([
+          'location' => function ($query){
+            $query->select('id','name');
+          },
+          'typeDetail' => function ($query) {
+            $query->select('id','name');
+          }])->orderBy('created_at','DESC')
+          ->paginate($page);
+      }catch(\Exception $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e->errorInfo
+        );
+      }
+
       return $asset;
     }
 
@@ -50,14 +66,28 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
-      $request['id_asset_order'] = $this->checkSimilarAsset($request['id_asset_type_detail']);
-      $request['tag_rfid']=str_random(14);
-      $request['barcode']=str_random(14);
-      $request['id']=$this->createID($request);
-  		$asset = new Asset($request->all());
-  		$asset->save();
-  		return $asset;
+      //
+      try{
+        $request['id_asset_order'] = $this->checkSimilarAsset($request['id_asset_type_detail']);
+        if($request['tag_rfid']==null || $request['tag_rfid']==''){
+          $request['tag_rfid']=str_random(14);
+        }
+        if($request['barcode']==null || $request['barcode']==''){
+          $request['barcode']=str_random(14);
+        }
+        $request['id']=$this->createID($request);
+        $asset = new Asset($request->all());
+        $asset->save();
+      }catch(\Exception $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e
+        );
+      }
+      return array(
+        'status' => 'error',
+        'message'=> $asset
+      );
     }
 
     /**
@@ -105,10 +135,19 @@ class AssetController extends Controller
     public function destroy($id)
     {
         //
-        $asset = $this->show($id);
-        $asset->delete();
+        try{
+          $asset = $this->show($id);
+          $asset->delete();
+        }catch(\Exception $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e->errorInfo
+          );
+        }
+
         return array(
-          'status' => 'OK',
+          'status' => 'success',
+          'message'=> 'succes delete '.$id
         );
     }
 

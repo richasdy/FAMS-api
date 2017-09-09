@@ -22,7 +22,14 @@ class TypeController extends Controller
 
     public function indexPaginate($page)
     {
-      $type = Type::orderBy('created_at')->paginate($page);
+      try{
+        $type = Type::orderBy('created_at')->paginate($page);
+      }catch(\Exception $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e
+        );
+      }
       return $type;
     }
 
@@ -45,11 +52,21 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
-        $last_id = Type::max('id');
-        $request['id']=$last_id+1;
-        $type = new Type($request->all());
-        $type->save();
-        return $type;
+        try{
+          $last_id = Type::max('id');
+          $request['id']=$last_id+1;
+          $type = new Type($request->all());
+          $type->save();
+        }catch(\Exception $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
+        return array(
+          'status' => 'success',
+          'message'=> $type
+        );
     }
 
     /**
@@ -86,8 +103,15 @@ class TypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+      try{
         $type = Type::where('id',$id)->first();
         $type->update($request->all());
+      }catch(\Error $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e
+        );
+      }
         return $type;
     }
 
@@ -100,10 +124,19 @@ class TypeController extends Controller
     public function destroy($id)
     {
         //
+      try{
         $type = $this->show($id);
         $type->delete();
+      }catch(\Error $e){
         return array(
-          'status' => 'OK',
+          'status' => 'error',
+          'message'=> $e
         );
+      }
+
+      return array(
+        'status' => 'success',
+        'message'=> 'success delete '.$id
+      );
     }
 }

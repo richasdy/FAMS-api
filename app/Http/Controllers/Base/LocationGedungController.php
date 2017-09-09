@@ -23,7 +23,14 @@ class LocationGedungController extends Controller
     public function indexPaginate($page)
     {
         //
-		    $location = Gedung::orderBy('created_at')->paginate($page);
+        try{
+          $location = Gedung::orderBy('created_at')->paginate($page);
+        }catch(\Exception $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
 		    return $location;
     }
 
@@ -46,11 +53,22 @@ class LocationGedungController extends Controller
     public function store(Request $request)
     {
         //
+        try{
         $last_id = Gedung::max('id');
         $request['id']=$last_id+1;
         $location = new Gedung($request->all());
     		$location->save();
-    		return $location;
+      }catch(\Exception $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
+
+        return array(
+          'status' => 'success',
+          'message'=> $location
+        );
     }
 
     /**
@@ -87,8 +105,15 @@ class LocationGedungController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try{
         $location = Gedung::where('id',$id)->first();
         $location->update($request->all());
+        }catch(\Exception $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
         return $location;
     }
 
@@ -101,10 +126,19 @@ class LocationGedungController extends Controller
     public function destroy($id)
     {
         //
-        $location = $this->show($id);
-        $location->delete();
+        try{
+          $location = $this->show($id);
+          $location->delete();
+        }catch(\Error $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
+
         return array(
-          'status' => 'OK',
+          'status' => 'success',
+          'message'=> 'success delete '.$id
         );
     }
 }

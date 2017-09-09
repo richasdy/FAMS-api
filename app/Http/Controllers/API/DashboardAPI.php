@@ -33,12 +33,18 @@ class DashboardAPI extends Controller
       $locationToAsset = $this->locationToAsset();
       $typeToAsset = $this->typeToAsset();
 
-      return array('total_asset' => $total_asset,
+      $returnData = array(
+                   'total_asset' => $total_asset,
                    'total_type'  => $total_type,
                    'total_gedung'=> $total_gedung,
                    'total_user'  => $total_user,
                    'location'    => $locationToAsset,
                    'type'        => $typeToAsset,
+      );
+
+      return array(
+        'status' => 'success',
+        'data'   => $returnData,
       );
     }
 

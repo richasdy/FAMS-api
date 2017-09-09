@@ -23,12 +23,19 @@ class TypeDetailController extends Controller
     public function indexPaginate($page)
     {
       //$type = TypeDetail::orderBy('created_at')->paginate($page);
-      $type = TypeDetail::with([
-        'TypeParent' => function ($query){
-          $query->select('id','name');
-        }
-      ])->orderBy('created_at','DESC')
-      ->paginate($page);
+      try{
+        $type = TypeDetail::with([
+          'TypeParent' => function ($query){
+            $query->select('id','name');
+          }
+        ])->orderBy('created_at','DESC')
+        ->paginate($page);
+      }catch(\Exception $e){
+        return array(
+          'status' => 'error',
+          'message'=> $e
+        );
+      }
       return $type;
     }
     /**
@@ -50,11 +57,21 @@ class TypeDetailController extends Controller
     public function store(Request $request)
     {
         //
+        try{
         $last_id = TypeDetail::where('id','like',$request->id_asset_type.'%')->max('id');
         $request['id']=$last_id+1;
         $type = new TypeDetail($request->all());
         $type->save();
-        return $type;
+      }catch(\Error $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
+        return array(
+          'status' => 'success',
+          'message'=> $type
+        );
     }
 
     /**
@@ -91,8 +108,15 @@ class TypeDetailController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $type = TypeDetail::where('id',$id)->first();
-        $type->update($request->all());
+        try{
+          $type = TypeDetail::where('id',$id)->first();
+          $type->update($request->all());
+        }catch(\Error $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
         return $type;
     }
 
@@ -105,10 +129,18 @@ class TypeDetailController extends Controller
     public function destroy($id)
     {
         //
-        $type = $this->show($id);
-        $type->delete();
+        try{
+          $type = $this->show($id);
+          $type->delete();
+        }catch(\Error $e){
+          return array(
+            'status' => 'error',
+            'message'=> $e
+          );
+        }
         return array(
-          'status' => 'OK',
+          'status' => 'success',
+          'message'=> 'success delete '.$id
         );
     }
 }
