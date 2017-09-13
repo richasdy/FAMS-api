@@ -16,6 +16,12 @@ class LocationAPI extends Controller
       $this->LOCATION = new Location();
     }
 
+    public function index()
+    {
+      # code...
+      $location = $this->LOCATION->index();
+      return $location;
+    }
     public function ListLocation(){
       //$location = $this->LOCATION->index();
       $location = $this->LOCATION->indexPaginate(10);

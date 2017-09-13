@@ -17,6 +17,16 @@ class AssetAPI extends Controller
       $this->ASSET = new Asset();
     }
 
+    public function index(){
+      $formatAssets=array();
+      $assets = $this->ASSET->index();
+      $formatAssets = $assets->toArray();
+      return array(
+        'status' => 'success',
+        'data'   => $formatAssets,
+      );
+    }
+
     public function ListAsset(){
       //initiate
       $formatAssets=array();

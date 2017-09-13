@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'auth:api'], function () {
 
   Route::get('index-asset','AssetAPI@ListAsset');
+  Route::get('asset', 'AssetAPI@index');
   Route::get('cu-page-asset','AssetAPI@PageAsset');
   Route::get('create-asset','AssetAPI@CreateAsset');
   Route::get('update-asset/{id}','AssetAPI@UpdateAsset');
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('delete-gedung/{id}','GedungAPI@DeleteGedung');
 
   Route::get('index-location','LocationAPI@ListLocation');
+  Route::get('location', 'LocationAPI@index');
   Route::get('cu-page-location','LocationAPI@PageLocation');
   Route::get('create-location','LocationAPI@CreateLocation');
   Route::get('update-location/{id}','LocationAPI@UpdateLocation');
@@ -44,6 +46,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('delete-type/{id}','TypeAPI@DeleteType');
 
   Route::get('index-type-detail','TypeDetailAPI@ListTypeDetail');
+  Route::get('typedetail','TypeDetailAPI@index');
   Route::get('cu-page-type-detail','TypeDetailAPI@PageTypeDetail');
   Route::get('create-type-detail','TypeDetailAPI@CreateTypeDetail');
   Route::get('update-type-detail/{id}','TypeDetailAPI@UpdateTypeDetail');

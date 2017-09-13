@@ -16,6 +16,12 @@ class TypeDetailAPI extends Controller
       $this->TYPEDETAIL = new TypeDetail();
     }
 
+    public function index()
+    {
+      $typeDetail = $this->TYPEDETAIL->index();
+      return $typeDetail;
+    }
+
     public function ListTypeDetail(){
       $formatJson = array();
       $typeDetail = $this->TYPEDETAIL->indexPaginate(10);
