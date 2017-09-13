@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('delete-location/{id}','LocationAPI@DeleteLocation');
 
   Route::get('index-type','TypeAPI@ListType');
+  Route::get('type', 'TypeAPI@index');
   Route::get('cu-page-type','TypeAPI@PageType');
   Route::get('create-type','TypeAPI@CreateType');
   Route::get('update-type/{id}','TypeAPI@UpdateType');
