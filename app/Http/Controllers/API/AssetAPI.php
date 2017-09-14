@@ -44,6 +44,8 @@ class AssetAPI extends Controller
           'id'      => $assets[$i]->id,
           'origin'  => $assets[$i]->asset_origin,
           'year'    => $assets[$i]->year,
+          'merk'    => $assets[$i]->merk,
+          'image'   => $assets[$i]->image,
           'location'=> $assets[$i]->location->name,
           'type'    => $assets[$i]->typeDetail->name,
           'order'   => $assets[$i]->id_asset_order,
