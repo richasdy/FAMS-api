@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('asset', 'AssetAPI@index');
   Route::get('cu-page-asset','AssetAPI@PageAsset');
   Route::get('create-asset','AssetAPI@CreateAsset');
+  Route::post('create-asset','AssetAPI@CreateAsset');
   Route::get('update-asset/{id}','AssetAPI@UpdateAsset');
   Route::get('delete-asset/{id}','AssetAPI@DeleteAsset');
 
