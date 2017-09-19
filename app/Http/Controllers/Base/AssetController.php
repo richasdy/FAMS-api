@@ -85,8 +85,9 @@ class AssetController extends Controller
         );
       }
       return array(
-        'status' => 'error',
-        'message'=> $asset
+        'status' => 'success',
+        // 'message'=> $asset
+        'message' => 'Asset berhasil disimpan'
       );
     }
 
